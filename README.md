@@ -5,8 +5,12 @@ prerequirement:
   - node go1.23.4
 
 
+go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
 wails init -n go-win-config-tool
 
 wails dev
+
+## goal
+
 
