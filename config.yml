@@ -1,0 +1,18 @@
+root:
+  paths:
+    - d:/ws/my-tools
+    - d:/d-tmp
+    - d:/ws/apps
+    - d:/ws/git-gitee
+    - d:/ws/git-github
+    - d:/ws/git-other
+    - d:/ws/jianguoyun_files
+    - d:/ws/cached_files/clipcache
+    - d:/ws/cached_files/jianguoyun
+    - d:/ws/cached_files/wechat
+    - d:/downloadss
+    - d:/ws/vm-os
+    - d:/ws/link_dir
+    - ~/.ssh
+    - ~/.m2
+    - ~/desktop/sc

@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="paths-card">
     <h3>目录（Paths）</h3>
 
     <ul class="list">
@@ -42,8 +42,11 @@ onMounted(load)
 </script>
 
 <style scoped>
-.card {
-  padding: 16px;
+.paths-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
 }
 
 .list {

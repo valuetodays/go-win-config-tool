@@ -18,8 +18,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "go-win-config-tool",
-		Width:  1024,
-		Height: 768,
+		Width:  820,
+		Height: 614,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
