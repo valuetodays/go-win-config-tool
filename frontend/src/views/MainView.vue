@@ -26,12 +26,13 @@ import { ref, computed } from 'vue'
 import PathsTab from '@/components/tabs/PathsTab.vue'
 import EnvsTab from '@/components/tabs/EnvsTab.vue'
 import SoftwaresTab from '@/components/tabs/SoftwaresTab.vue'
-
+import SettingsTab from '@/components/tabs/SettingsTab.vue'
 
 const tabs = [
   { key: 'paths', label: 'Paths', component: PathsTab },
   { key: 'envs', label: 'Envs', component: EnvsTab },
   { key: 'softwares', label: 'Softwares', component: SoftwaresTab },
+  { key: 'settings', label: 'Settings', component: SettingsTab },
 
 ]
 

@@ -8,18 +8,18 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 // App struct
 type App struct {
 	ctx context.Context
-	cfg *config.RootConfig
 }
 
 // NewApp creates a new App application struct
 func NewApp() *App {
-	cfg, _ := config.LoadConfig("config.yml")
-	return &App{cfg: cfg}
+	return &App{}
 }
 
 // startup is called when the app starts. The context is saved
@@ -44,7 +44,7 @@ func expandPath(p string) string {
 func (a *App) GetPathsStatus() ([]domain.PathStatus, error) {
 	result := []domain.PathStatus{}
 
-	for _, p := range a.cfg.Root.Paths {
+	for _, p := range config.Get().Root.Paths {
 		realPath := expandPath(p)
 		_, err := os.Stat(realPath)
 
@@ -62,7 +62,7 @@ func (a *App) CreatePath(path string) error {
 }
 
 func (a *App) GetEnvStatus() ([]domain.EnvStatus, error) {
-	cfg := a.cfg.Root.Envs
+	cfg := config.Get().Root.Envs
 	result := []domain.EnvStatus{}
 
 	for _, env := range cfg {
@@ -105,7 +105,7 @@ func (a *App) AppendEnv(name string, values []string, scope string) error {
 func (a *App) GetSoftwareStatus() ([]domain.SoftwareStatus, error) {
 	result := []domain.SoftwareStatus{}
 
-	for _, sw := range a.cfg.Root.Softwares {
+	for _, sw := range config.Get().Root.Softwares {
 		status := domain.SoftwareStatus{
 			Name:    sw.Name,
 			RootDir: sw.RootDir,
@@ -130,4 +130,30 @@ func (a *App) GetSoftwareStatus() ([]domain.SoftwareStatus, error) {
 	}
 
 	return result, nil
+}
+
+func (a *App) SelectAndLoadConfig() (string, error) {
+	path, err := runtime.OpenFileDialog(a.ctx, runtime.OpenDialogOptions{
+		Title: "选择 config.yml",
+		Filters: []runtime.FileFilter{
+			{DisplayName: "YAML 文件", Pattern: "*.yml;*.yaml"},
+		},
+	})
+	if err != nil || path == "" {
+		return "", err
+	}
+
+	_, err = config.Load(path)
+	if err != nil {
+		return "", err
+	}
+
+	// 🔔 通知前端：配置已变更
+	runtime.EventsEmit(a.ctx, "config:changed")
+
+	return path, nil
+}
+
+func (a *App) GetCurrentConfigPath() string {
+	return config.Path()
 }

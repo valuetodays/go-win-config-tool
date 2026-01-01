@@ -10,6 +10,10 @@ export function CreatePath(arg1) {
   return window['go']['main']['App']['CreatePath'](arg1);
 }
 
+export function GetCurrentConfigPath() {
+  return window['go']['main']['App']['GetCurrentConfigPath']();
+}
+
 export function GetEnvStatus() {
   return window['go']['main']['App']['GetEnvStatus']();
 }
@@ -24,6 +28,10 @@ export function GetSoftwareStatus() {
 
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
+}
+
+export function SelectAndLoadConfig() {
+  return window['go']['main']['App']['SelectAndLoadConfig']();
 }
 
 export function SetEnv(arg1, arg2, arg3) {

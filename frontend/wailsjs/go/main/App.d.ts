@@ -6,6 +6,8 @@ export function AppendEnv(arg1:string,arg2:Array<string>,arg3:string):Promise<vo
 
 export function CreatePath(arg1:string):Promise<void>;
 
+export function GetCurrentConfigPath():Promise<string>;
+
 export function GetEnvStatus():Promise<Array<domain.EnvStatus>>;
 
 export function GetPathsStatus():Promise<Array<domain.PathStatus>>;
@@ -13,5 +15,7 @@ export function GetPathsStatus():Promise<Array<domain.PathStatus>>;
 export function GetSoftwareStatus():Promise<Array<domain.SoftwareStatus>>;
 
 export function Greet(arg1:string):Promise<string>;
+
+export function SelectAndLoadConfig():Promise<string>;
 
 export function SetEnv(arg1:string,arg2:string,arg3:string):Promise<void>;

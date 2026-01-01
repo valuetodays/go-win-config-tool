@@ -73,12 +73,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,onUnmounted } from 'vue'
 import {
   GetEnvStatus,
   SetEnv,
   AppendEnv
 } from '@wailsjs/go/main/App'
+import { registerReload, unregisterReload } from '@/services/configBus'
+
 
 const envs = ref([])
 
@@ -108,7 +110,14 @@ async function onAppend(env) {
   await load()
 }
 
-onMounted(load)
+onMounted(() => {
+  load()
+  registerReload(load)
+})
+
+onUnmounted(() => {
+  unregisterReload(load)
+})
 </script>
 
 <style scoped>

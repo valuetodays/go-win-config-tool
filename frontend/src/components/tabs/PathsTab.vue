@@ -20,12 +20,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import StatusIcon from '../common/StatusIcon.vue'
+import { ref, onMounted, onUnmounted  } from 'vue'
+import StatusIcon from '@/components/common/StatusIcon.vue'
 import {
   GetPathsStatus,
   CreatePath
 } from '@wailsjs/go/main/App'
+import { registerReload, unregisterReload } from '@/services/configBus'
 
 const paths = ref([])
 
@@ -35,10 +36,16 @@ const load = async () => {
 
 const create = async (path) => {
   await CreatePath(path)
-  await load()
 }
 
-onMounted(load)
+onMounted(() => {
+  load()
+  registerReload(load)
+})
+
+onUnmounted(() => {
+  unregisterReload(load)
+})
 </script>
 
 <style scoped>
