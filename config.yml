@@ -16,3 +16,15 @@ root:
     - ~/.ssh
     - ~/.m2
     - ~/desktop/sc
+  envs:
+    - name: JAVA_HOME
+      value: D:/ws/apps/jdk8
+      scope: user        # user | system
+    - name: MAVEN_HOME
+      value: D:/ws/apps/maven
+      scope: user
+    - name: PATH
+      append:
+        - D:/ws/apps/jdk8/bin
+        - D:/ws/apps/maven/bin
+      scope: user

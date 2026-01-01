@@ -60,3 +60,44 @@ func (a *App) CreatePath(path string) error {
 	realPath := expandPath(path)
 	return os.MkdirAll(realPath, os.ModePerm)
 }
+
+func (a *App) GetEnvStatus() ([]domain.EnvStatus, error) {
+	cfg := a.cfg.Root.Envs
+	result := []domain.EnvStatus{}
+
+	for _, env := range cfg {
+		current := os.Getenv(env.Name)
+
+		status := domain.EnvStatus{
+			Name:   env.Name,
+			Scope:  env.Scope,
+			Exists: current != "",
+			Value:  current,
+		}
+
+		if env.Value != "" {
+			status.Correct = current == env.Value
+		}
+
+		if len(env.Append) > 0 {
+			for _, p := range env.Append {
+				if !strings.Contains(current, p) {
+					status.Missing = append(status.Missing, p)
+				}
+			}
+			status.Correct = len(status.Missing) == 0
+		}
+
+		result = append(result, status)
+	}
+
+	return result, nil
+}
+
+func (a *App) SetEnv(name, value, scope string) error {
+	return nil
+}
+
+func (a *App) AppendEnv(name string, values []string, scope string) error {
+	return nil
+}
