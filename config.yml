@@ -28,3 +28,8 @@ root:
         - D:/ws/apps/jdk8/bin
         - D:/ws/apps/maven/bin
       scope: user
+  softwares:
+    - name: VirtualBox
+      root_dir: D:/ws/apps/VirtualBox
+    - name: Maven
+      root_dir: D:/ws/apps/apache-maven-3.6.3

@@ -101,3 +101,33 @@ func (a *App) SetEnv(name, value, scope string) error {
 func (a *App) AppendEnv(name string, values []string, scope string) error {
 	return nil
 }
+
+func (a *App) GetSoftwareStatus() ([]domain.SoftwareStatus, error) {
+	result := []domain.SoftwareStatus{}
+
+	for _, sw := range a.cfg.Root.Softwares {
+		status := domain.SoftwareStatus{
+			Name:    sw.Name,
+			RootDir: sw.RootDir,
+		}
+
+		if info, err := os.Stat(sw.RootDir); err == nil && info.IsDir() {
+			status.Exists = true
+		}
+		/*
+		   for _, item := range sw.Items {
+		       full := filepath.Join(sw.RootDir, item.Path)
+		       _, err := os.Stat(full)
+
+		       status.Items = append(status.Items, SoftwareItemStatus{
+		           Type:   item.Type,
+		           Path:   item.Path,
+		           Exists: err == nil,
+		       })
+		   }
+		*/
+		result = append(result, status)
+	}
+
+	return result, nil
+}

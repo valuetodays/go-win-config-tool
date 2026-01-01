@@ -25,11 +25,14 @@ import { ref, computed } from 'vue'
 
 import PathsTab from '@/components/tabs/PathsTab.vue'
 import EnvsTab from '@/components/tabs/EnvsTab.vue'
-// 未来：FilesTab / SoftwaresTab
+import SoftwaresTab from '@/components/tabs/SoftwaresTab.vue'
+
 
 const tabs = [
   { key: 'paths', label: 'Paths', component: PathsTab },
   { key: 'envs', label: 'Envs', component: EnvsTab },
+  { key: 'softwares', label: 'Softwares', component: SoftwaresTab },
+
 ]
 
 const currentTab = ref('paths')

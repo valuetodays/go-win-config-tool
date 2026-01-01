@@ -18,6 +18,10 @@ export function GetPathsStatus() {
   return window['go']['main']['App']['GetPathsStatus']();
 }
 
+export function GetSoftwareStatus() {
+  return window['go']['main']['App']['GetSoftwareStatus']();
+}
+
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }

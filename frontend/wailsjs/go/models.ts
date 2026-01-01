@@ -36,6 +36,22 @@ export namespace domain {
 	        this.exists = source["exists"];
 	    }
 	}
+	export class SoftwareStatus {
+	    name: string;
+	    rootDir: string;
+	    exists: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new SoftwareStatus(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.name = source["name"];
+	        this.rootDir = source["rootDir"];
+	        this.exists = source["exists"];
+	    }
+	}
 
 }
 

@@ -6,9 +6,14 @@ type EnvConfig struct {
 	Append []string `yaml:"append,omitempty"`
 	Scope  string   `yaml:"scope"` // user | system
 }
+type SoftwareConfig struct {
+	Name    string `yaml:"name"`
+	RootDir string `yaml:"root_dir"`
+}
 type RootConfig struct {
 	Root struct {
-		Paths []string    `yaml:"paths"`
-		Envs  []EnvConfig `yaml:"envs"`
+		Paths     []string         `yaml:"paths"`
+		Envs      []EnvConfig      `yaml:"envs"`
+		Softwares []SoftwareConfig `yaml:"softwares"`
 	} `yaml:"root"`
 }
