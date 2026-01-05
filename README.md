@@ -13,4 +13,8 @@ wails dev
 
 ## goal
 
-
+- [x] show directories
+- [x] show envs
+- [ ] show softwares
+  + [ ] copy or unzip them
+- [ ] show shortcut list
