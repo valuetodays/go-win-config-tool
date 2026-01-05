@@ -1,12 +1,12 @@
 export namespace domain {
 	
 	export class EnvStatus {
-	    Name: string;
-	    Scope: string;
-	    Exists: boolean;
-	    Correct: boolean;
-	    Missing: string[];
-	    Value: string;
+	    name: string;
+	    scope: string;
+	    exists: boolean;
+	    correct: boolean;
+	    missing: string[];
+	    value: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new EnvStatus(source);
@@ -14,12 +14,12 @@ export namespace domain {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
-	        this.Name = source["Name"];
-	        this.Scope = source["Scope"];
-	        this.Exists = source["Exists"];
-	        this.Correct = source["Correct"];
-	        this.Missing = source["Missing"];
-	        this.Value = source["Value"];
+	        this.name = source["name"];
+	        this.scope = source["scope"];
+	        this.exists = source["exists"];
+	        this.correct = source["correct"];
+	        this.missing = source["missing"];
+	        this.value = source["value"];
 	    }
 	}
 	export class PathStatus {

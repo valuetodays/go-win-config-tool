@@ -8,11 +8,8 @@
       class="software-block"
     >
       <div class="software-header">
-        <span
-          class="status"
-          :class="sw.exists ? 'ok' : 'missing'"
-        >
-          {{ sw.exists ? '✓' : '✕' }}
+        <span class="status">
+          <StatusIcon :exists="sw.exists" />
         </span>
 
         <div class="software-title">
@@ -29,11 +26,8 @@
           :key="item.path"
           class="software-item"
         >
-          <span
-            class="item-status"
-            :class="item.exists ? 'ok' : 'missing'"
-          >
-            {{ item.exists ? '✓' : '✕' }}
+          <span class="item-status">
+            <StatusIcon :exists="item.exists" />
           </span>
 
           <span class="item-type">
@@ -53,6 +47,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { GetSoftwareStatus } from '@wailsjs/go/main/App'
 import { registerReload, unregisterReload } from '@/services/configBus'
+import StatusIcon from '@/components/common/StatusIcon.vue'
 
 
 const softwares = ref([])
@@ -131,11 +126,4 @@ onUnmounted(() => {
   color: #334155;
 }
 
-.ok {
-  color: #22c55e;
-}
-
-.missing {
-  color: #94a3b8;
-}
 </style>

@@ -76,7 +76,11 @@ func (a *App) GetEnvStatus() ([]domain.EnvStatus, error) {
 		}
 
 		if env.Value != "" {
-			status.Correct = current == env.Value
+			euqals := strings.EqualFold(
+				filepath.Clean(current),
+				filepath.Clean(env.Value),
+			)
+			status.Correct = euqals
 		}
 
 		if len(env.Append) > 0 {

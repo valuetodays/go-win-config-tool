@@ -1,10 +1,10 @@
 package domain
 
 type EnvStatus struct {
-	Name    string
-	Scope   string
-	Exists  bool
-	Correct bool
-	Missing []string
-	Value   string
+	Name    string   `json:"name"`
+	Scope   string   `json:"scope"`
+	Exists  bool     `json:"exists"`
+	Correct bool     `json:"correct"`
+	Missing []string `json:"missing"`
+	Value   string   `json:"value"`
 }

@@ -20,6 +20,7 @@
         <div class="env-name">
           {{ env.name }}
           <span class="env-scope">({{ env.scope }})</span>
+          <!-- {{ env }} -->
         </div>
 
         <!-- 描述 -->

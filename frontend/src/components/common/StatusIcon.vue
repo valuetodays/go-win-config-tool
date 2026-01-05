@@ -15,6 +15,6 @@ defineProps({
   color: #3cb371;
 }
 .missing {
-  color: #999;
+  color: #a52929;
 }
 </style>
