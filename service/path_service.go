@@ -1,7 +1,6 @@
 package service
 
 import (
-	"go-win-config-tool/config"
 	"go-win-config-tool/domain"
 	"os"
 	"path/filepath"
@@ -27,7 +26,7 @@ func expandPath(p string) string {
 func (s *PathService) GetPathsStatus() []domain.PathStatus {
 	result := []domain.PathStatus{}
 
-	for _, p := range config.Get().Root.Paths {
+	for _, p := range s.paths {
 		realPath := expandPath(p)
 		_, err := os.Stat(realPath)
 

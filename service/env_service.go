@@ -16,11 +16,10 @@ func NewEnvService(envConfig []config.EnvConfig) *EnvService {
 	return &EnvService{envs: envConfig}
 }
 
-func (a *EnvService) GetEnvStatus() ([]domain.EnvStatus, error) {
-	cfg := config.Get().Root.Envs
+func (s *EnvService) GetEnvStatus() ([]domain.EnvStatus, error) {
 	result := []domain.EnvStatus{}
 
-	for _, env := range cfg {
+	for _, env := range s.envs {
 		current := os.Getenv(env.Name)
 
 		status := domain.EnvStatus{
@@ -53,10 +52,10 @@ func (a *EnvService) GetEnvStatus() ([]domain.EnvStatus, error) {
 	return result, nil
 }
 
-func (a *EnvService) SetEnv(name, value, scope string) error {
+func (s *EnvService) SetEnv(name, value, scope string) error {
 	return nil
 }
 
-func (a *EnvService) AppendEnv(name string, values []string, scope string) error {
+func (s *EnvService) AppendEnv(name string, values []string, scope string) error {
 	return nil
 }
