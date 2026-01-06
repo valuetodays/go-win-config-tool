@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-win-config-tool/internal/config"
-	"go-win-config-tool/internal/domain"
+	"go-win-config-tool/config"
+	"go-win-config-tool/domain"
+	"go-win-config-tool/service"
 	"os"
 	"path/filepath"
 	"strings"
@@ -14,7 +15,14 @@ import (
 
 // App struct
 type App struct {
-	ctx context.Context
+	ctx        context.Context
+	configPath string
+	cfg        *config.RootConfig
+
+	pathSvc *service.PathService
+	// envSvc      *service.EnvService
+	// softwareSvc *service.SoftwareService
+	shortcutSvc *service.ShortcutService
 }
 
 // NewApp creates a new App application struct
@@ -31,34 +39,6 @@ func (a *App) startup(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
-}
-
-func expandPath(p string) string {
-	if strings.HasPrefix(p, "~") {
-		home, _ := os.UserHomeDir()
-		return filepath.Join(home, p[1:])
-	}
-	return p
-}
-
-func (a *App) GetPathsStatus() ([]domain.PathStatus, error) {
-	result := []domain.PathStatus{}
-
-	for _, p := range config.Get().Root.Paths {
-		realPath := expandPath(p)
-		_, err := os.Stat(realPath)
-
-		result = append(result, domain.PathStatus{
-			Path:   p,
-			Exists: err == nil,
-		})
-	}
-	return result, nil
-}
-
-func (a *App) CreatePath(path string) error {
-	realPath := expandPath(path)
-	return os.MkdirAll(realPath, os.ModePerm)
 }
 
 func (a *App) GetEnvStatus() ([]domain.EnvStatus, error) {
@@ -147,7 +127,10 @@ func (a *App) SelectAndLoadConfig() (string, error) {
 		return "", err
 	}
 
-	_, err = config.Load(path)
+	fmt.Println("begin. Loading config from:", path)
+	err = a.loadConfig(path)
+	fmt.Println("end.Loading config from:", path, err)
+	// _, err = config.Load(path)
 	if err != nil {
 		return "", err
 	}

@@ -30,6 +30,10 @@ export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
 
+export function LoadConfigFile(arg1) {
+  return window['go']['main']['App']['LoadConfigFile'](arg1);
+}
+
 export function SelectAndLoadConfig() {
   return window['go']['main']['App']['SelectAndLoadConfig']();
 }

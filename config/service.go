@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -32,5 +33,6 @@ func Get() *RootConfig {
 func Path() string {
 	mu.RLock()
 	defer mu.RUnlock()
+	fmt.Println("Current config path:", currentPath)
 	return currentPath
 }

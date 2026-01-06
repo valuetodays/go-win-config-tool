@@ -16,6 +16,8 @@ export function GetSoftwareStatus():Promise<Array<domain.SoftwareStatus>>;
 
 export function Greet(arg1:string):Promise<string>;
 
+export function LoadConfigFile(arg1:string):Promise<void>;
+
 export function SelectAndLoadConfig():Promise<string>;
 
 export function SetEnv(arg1:string,arg2:string,arg3:string):Promise<void>;
