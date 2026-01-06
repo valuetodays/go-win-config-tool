@@ -1,6 +1,6 @@
 package config
 
-type Shortcut struct {
+type ShortcutConfig struct {
 	Name   string `yaml:"name"`
 	Target string `yaml:"target"`
 	GenCmd string `yaml:"gencmd"`
@@ -23,6 +23,6 @@ type RootConfig struct {
 		Paths     []string         `yaml:"paths"`
 		Envs      []EnvConfig      `yaml:"envs"`
 		Softwares []SoftwareConfig `yaml:"softwares"`
-		Shortcuts []Shortcut       `yaml:"shortcuts"`
+		Shortcuts []ShortcutConfig `yaml:"shortcuts"`
 	} `yaml:"root"`
 }

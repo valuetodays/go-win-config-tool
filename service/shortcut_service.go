@@ -12,10 +12,10 @@ import (
 )
 
 type ShortcutService struct {
-	shortcuts []config.Shortcut
+	shortcuts []config.ShortcutConfig
 }
 
-func NewShortcutService(shortcuts []config.Shortcut) *ShortcutService {
+func NewShortcutService(shortcuts []config.ShortcutConfig) *ShortcutService {
 	return &ShortcutService{shortcuts: shortcuts}
 }
 

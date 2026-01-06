@@ -7,8 +7,6 @@ import (
 	"go-win-config-tool/domain"
 	"go-win-config-tool/service"
 	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -20,7 +18,7 @@ type App struct {
 	cfg        *config.RootConfig
 
 	pathSvc *service.PathService
-	// envSvc      *service.EnvService
+	envSvc  *service.EnvService
 	// softwareSvc *service.SoftwareService
 	shortcutSvc *service.ShortcutService
 }
@@ -39,51 +37,6 @@ func (a *App) startup(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
-}
-
-func (a *App) GetEnvStatus() ([]domain.EnvStatus, error) {
-	cfg := config.Get().Root.Envs
-	result := []domain.EnvStatus{}
-
-	for _, env := range cfg {
-		current := os.Getenv(env.Name)
-
-		status := domain.EnvStatus{
-			Name:   env.Name,
-			Scope:  env.Scope,
-			Exists: current != "",
-			Value:  current,
-		}
-
-		if env.Value != "" {
-			euqals := strings.EqualFold(
-				filepath.Clean(current),
-				filepath.Clean(env.Value),
-			)
-			status.Correct = euqals
-		}
-
-		if len(env.Append) > 0 {
-			for _, p := range env.Append {
-				if !strings.Contains(current, p) {
-					status.Missing = append(status.Missing, p)
-				}
-			}
-			status.Correct = len(status.Missing) == 0
-		}
-
-		result = append(result, status)
-	}
-
-	return result, nil
-}
-
-func (a *App) SetEnv(name, value, scope string) error {
-	return nil
-}
-
-func (a *App) AppendEnv(name string, values []string, scope string) error {
-	return nil
 }
 
 func (a *App) GetSoftwareStatus() ([]domain.SoftwareStatus, error) {

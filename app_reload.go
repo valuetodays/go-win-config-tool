@@ -16,7 +16,7 @@ func (a *App) loadConfig(path string) error {
 	a.cfg = cfg
 
 	a.pathSvc = service.NewPathService(cfg.Root.Paths)
-	// a.envSvc = service.NewEnvService(cfg.Root.Envs)
+	a.envSvc = service.NewEnvService(cfg.Root.Envs)
 	// a.softwareSvc = service.NewSoftwareService(cfg.Root.Softwares)
 	a.shortcutSvc = service.NewShortcutService(cfg.Root.Shortcuts)
 
