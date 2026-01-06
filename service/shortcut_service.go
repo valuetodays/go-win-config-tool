@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"go-win-config-tool/config"
@@ -24,26 +25,36 @@ func normalize(p string) string {
 	return strings.ToLower(p)
 }
 
-func (s *ShortcutService) List() ([]domain.ShortcutStatus, error) {
+func expandWinEnv(s string) string {
+	re := regexp.MustCompile(`%([^%]+)%`)
+	return re.ReplaceAllStringFunc(s, func(match string) string {
+		// 去掉 % 符号
+		key := match[1 : len(match)-1]
+		return os.Getenv(key)
+	})
+}
+
+func (s *ShortcutService) GetShortcuts() ([]domain.ShortcutStatus, error) {
 	var result []domain.ShortcutStatus
 
-	// this path should be configured in yml
-	desktop := os.Getenv("USERPROFILE") + "\\Desktop\\scs"
-
 	for _, sc := range s.shortcuts {
-		path := filepath.Join(desktop, sc.Name)
-
+		path := filepath.Join("", sc.Source)
+		// expandedTarget := os.ExpandEnv(sc.Target)
+		expandedTarget := expandWinEnv(sc.Target)
 		status := domain.ShortcutStatus{
 			Name:   sc.Name,
-			Path:   path,
-			Target: sc.Target,
+			Source: path,
+			Target: expandedTarget,
 		}
 
 		if _, err := os.Stat(path); err == nil {
 			status.Exists = true
 
-			if target, err := shortcut.ReadTarget(path); err == nil {
-				status.Correct = normalize(target) == normalize(sc.Target)
+			if target, err := shortcut.ReadTarget(expandedTarget); err == nil {
+				realFileLnkTo := normalize(target)
+				sourceFile := normalize(sc.Source)
+				status.Correct = (realFileLnkTo == sourceFile)
+				status.Source = realFileLnkTo
 			}
 		}
 
@@ -53,7 +64,7 @@ func (s *ShortcutService) List() ([]domain.ShortcutStatus, error) {
 	return result, nil
 }
 
-func (s *ShortcutService) Generate(name string) error {
+func (s *ShortcutService) GenerateShortcut(name string) error {
 	for _, sc := range s.shortcuts {
 		if sc.Name == name {
 			cmd := exec.Command("cmd", "/C", sc.GenCmd)

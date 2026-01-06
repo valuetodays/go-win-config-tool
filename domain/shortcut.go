@@ -2,7 +2,7 @@ package domain
 
 type ShortcutStatus struct {
 	Name    string `json:"name"`
-	Path    string `json:"path"`
+	Source  string `json:"source"`
 	Target  string `json:"target"`
 	Exists  bool   `json:"exists"`
 	Correct bool   `json:"correct"`

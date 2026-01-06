@@ -34,5 +34,6 @@ root:
       root_dir: D:/ws/apps/apache-maven-3.6.3
   shortcuts:
     - name: hosts.lnk
-      target: "C:/Windows/System32/drivers/etc/hosts"
-      remark: 'shortcut.exe /f:"%USERPROFILE%\\Desktop\\hosts.lnk" /a:c /t:"C:/Windows/System32/drivers/etc/hosts"'
+      source: "C:/Windows/System32/drivers/etc/hosts"
+      target: "%USERPROFILE%\\Desktop\\scs\\hosts.lnk"
+      remark: 'shortcut.exe /f:"%USERPROFILE%\\Desktop\\scs\\hosts.lnk" /a:c /t:"C:/Windows/System32/drivers/etc/hosts"'

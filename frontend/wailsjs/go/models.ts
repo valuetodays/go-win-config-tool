@@ -36,6 +36,26 @@ export namespace domain {
 	        this.exists = source["exists"];
 	    }
 	}
+	export class ShortcutStatus {
+	    name: string;
+	    source: string;
+	    target: string;
+	    exists: boolean;
+	    correct: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new ShortcutStatus(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.name = source["name"];
+	        this.source = source["source"];
+	        this.target = source["target"];
+	        this.exists = source["exists"];
+	        this.correct = source["correct"];
+	    }
+	}
 	export class SoftwareStatus {
 	    name: string;
 	    rootDir: string;

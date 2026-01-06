@@ -10,6 +10,10 @@ export function CreatePath(arg1) {
   return window['go']['main']['App']['CreatePath'](arg1);
 }
 
+export function GenerateShortcut(arg1) {
+  return window['go']['main']['App']['GenerateShortcut'](arg1);
+}
+
 export function GetCurrentConfigPath() {
   return window['go']['main']['App']['GetCurrentConfigPath']();
 }
@@ -22,16 +26,16 @@ export function GetPathsStatus() {
   return window['go']['main']['App']['GetPathsStatus']();
 }
 
+export function GetShortcuts() {
+  return window['go']['main']['App']['GetShortcuts']();
+}
+
 export function GetSoftwareStatus() {
   return window['go']['main']['App']['GetSoftwareStatus']();
 }
 
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
-}
-
-export function LoadConfigFile(arg1) {
-  return window['go']['main']['App']['LoadConfigFile'](arg1);
 }
 
 export function SelectAndLoadConfig() {

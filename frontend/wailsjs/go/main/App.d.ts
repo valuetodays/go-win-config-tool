@@ -6,17 +6,19 @@ export function AppendEnv(arg1:string,arg2:Array<string>,arg3:string):Promise<vo
 
 export function CreatePath(arg1:string):Promise<void>;
 
+export function GenerateShortcut(arg1:string):Promise<void>;
+
 export function GetCurrentConfigPath():Promise<string>;
 
 export function GetEnvStatus():Promise<Array<domain.EnvStatus>>;
 
 export function GetPathsStatus():Promise<Array<domain.PathStatus>>;
 
+export function GetShortcuts():Promise<Array<domain.ShortcutStatus>>;
+
 export function GetSoftwareStatus():Promise<Array<domain.SoftwareStatus>>;
 
 export function Greet(arg1:string):Promise<string>;
-
-export function LoadConfigFile(arg1:string):Promise<void>;
 
 export function SelectAndLoadConfig():Promise<string>;
 
