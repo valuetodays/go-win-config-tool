@@ -50,9 +50,9 @@ jobs:
           mkdir -p build
           go mod tidy
           # Windows build
-          GOOS=windows GOARCH=amd64 wails build -p -o build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe
+          GOOS=windows GOARCH=amd64 wails build -o build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe
           # Linux build
-          # GOOS=linux GOARCH=amd64 wails build -p -o build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux
+          # GOOS=linux GOARCH=amd64 wails build -o build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux
 
       #  Generate sha256
       - name: Generate SHA256
