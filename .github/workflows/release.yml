@@ -56,7 +56,6 @@ jobs:
       #  Generate sha256
       - name: Generate SHA256
         run: |
-          cd build
           sha256sum build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe   > build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe.sha256
           #sha256sum build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux     > build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux.sha256
 
