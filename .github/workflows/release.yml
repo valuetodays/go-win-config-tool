@@ -47,19 +47,18 @@ jobs:
       - name: Build Go Binaries
         run: |
           wails version
-          mkdir -p build
           go mod tidy
           # Windows build
-          GOOS=windows GOARCH=amd64 wails build -o build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe
+          GOOS=windows GOARCH=amd64 wails build -o ${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe
           # Linux build
-          # GOOS=linux GOARCH=amd64 wails build -o build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux
-
+          # GOOS=linux GOARCH=amd64 wails build -o ${{ env.APP_NAME }}-${{ env.VERSION }}-linux
+          cp ./build/bin/${{ env.APP_NAME }}-* ./build/
       #  Generate sha256
       - name: Generate SHA256
         run: |
           cd build
-          sha256sum build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe   > ${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe.sha256
-          #sha256sum build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux     > ${{ env.APP_NAME }}-${{ env.VERSION }}-linux.sha256
+          sha256sum build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe   > build/${{ env.APP_NAME }}-${{ env.VERSION }}-win.exe.sha256
+          #sha256sum build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux     > build/${{ env.APP_NAME }}-${{ env.VERSION }}-linux.sha256
 
       #  Upload Release Assets
       - name: Upload Release Assets
