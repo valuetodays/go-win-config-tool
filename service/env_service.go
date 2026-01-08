@@ -2,7 +2,7 @@ package service
 
 import (
 	"go-win-config-tool/config"
-	"go-win-config-tool/domain"
+	"go-win-config-tool/internal/dto"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,13 +16,13 @@ func NewEnvService(envConfig []config.EnvConfig) *EnvService {
 	return &EnvService{envs: envConfig}
 }
 
-func (s *EnvService) GetEnvStatus() ([]domain.EnvStatus, error) {
-	result := []domain.EnvStatus{}
+func (s *EnvService) GetEnvStatus() ([]dto.EnvStatus, error) {
+	result := []dto.EnvStatus{}
 
 	for _, env := range s.envs {
 		current := os.Getenv(env.Name)
 
-		status := domain.EnvStatus{
+		status := dto.EnvStatus{
 			Name:   env.Name,
 			Scope:  env.Scope,
 			Exists: current != "",

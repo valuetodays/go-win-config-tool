@@ -1,7 +1,7 @@
 package service
 
 import (
-	"go-win-config-tool/domain"
+	"go-win-config-tool/internal/dto"
 	"os"
 	"path/filepath"
 	"strings"
@@ -23,14 +23,14 @@ func expandPath(p string) string {
 	return p
 }
 
-func (s *PathService) GetPathsStatus() []domain.PathStatus {
-	result := []domain.PathStatus{}
+func (s *PathService) GetPathsStatus() []dto.PathStatus {
+	result := []dto.PathStatus{}
 
 	for _, p := range s.paths {
 		realPath := expandPath(p)
 		_, err := os.Stat(realPath)
 
-		result = append(result, domain.PathStatus{
+		result = append(result, dto.PathStatus{
 			Path:   p,
 			Exists: err == nil,
 		})

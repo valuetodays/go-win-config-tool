@@ -1,4 +1,8 @@
+# 说明路径可以使用/或\\，会统一转换
 root:
+  def_dirs:
+    software_dir: D:/ws/apps
+    shortcut_dir: '%USERPROFILE%\\Desktop\\scs'
   paths:
     - d:/ws/my-tools
     - d:/d-tmp
@@ -29,11 +33,13 @@ root:
       scope: user
   softwares:
     - name: VirtualBox
-      root_dir: D:/ws/apps/VirtualBox
+      dir_name: VirtualBox
     - name: Maven
-      root_dir: D:/ws/apps/apache-maven-3.6.3
+      dir_name: apache-maven-3.9.9
+    - name: chrome-extension-cookie-collector
+      dir_name: chrome-extension-cookie-collector
   shortcuts:
     - name: hosts.lnk
       source: "C:/Windows/System32/drivers/etc/hosts"
-      target: "%USERPROFILE%\\Desktop\\scs\\hosts.lnk"
-      remark: 'shortcut.exe /f:"%USERPROFILE%\\Desktop\\scs\\hosts.lnk" /a:c /t:"C:/Windows/System32/drivers/etc/hosts"'
+      target: "hosts.lnk"
+      gencmd: 'shortcut.exe /f:"%USERPROFILE%\\Desktop\\scs\\hosts.lnk" /a:c /t:"C:/Windows/System32/drivers/etc/hosts"'

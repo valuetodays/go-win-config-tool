@@ -1,10 +1,8 @@
 package main
 
-import (
-	"go-win-config-tool/domain"
-)
+import "go-win-config-tool/internal/dto"
 
-func (a *App) GetEnvStatus() ([]domain.EnvStatus, error) {
+func (a *App) GetEnvStatus() ([]dto.EnvStatus, error) {
 	if a.envSvc == nil {
 		return nil, nil
 	}

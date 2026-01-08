@@ -1,24 +1,24 @@
 package service
 
 import (
-	"go-win-config-tool/config"
-	"go-win-config-tool/domain"
+	"go-win-config-tool/internal/domain"
+	"go-win-config-tool/internal/dto"
 	"os"
 )
 
 type SoftwareService struct {
-	softwares []config.SoftwareConfig
+	softwares []domain.SoftwareModel
 }
 
-func NewSoftwareService(sw []config.SoftwareConfig) *SoftwareService {
+func NewSoftwareService(sw []domain.SoftwareModel) *SoftwareService {
 	return &SoftwareService{softwares: sw}
 }
 
-func (s *SoftwareService) GetSoftwareStatus() []domain.SoftwareStatus {
-	result := []domain.SoftwareStatus{}
+func (s *SoftwareService) GetSoftwareStatus() []dto.SoftwareStatus {
+	result := []dto.SoftwareStatus{}
 
 	for _, sw := range s.softwares {
-		status := domain.SoftwareStatus{
+		status := dto.SoftwareStatus{
 			Name:    sw.Name,
 			RootDir: sw.RootDir,
 		}

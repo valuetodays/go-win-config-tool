@@ -1,8 +1,8 @@
 package main
 
-import "go-win-config-tool/domain"
+import "go-win-config-tool/internal/dto"
 
-func (a *App) GetShortcuts() ([]domain.ShortcutStatus, error) {
+func (a *App) GetShortcuts() ([]dto.ShortcutStatus, error) {
 	return a.shortcutSvc.GetShortcuts()
 }
 

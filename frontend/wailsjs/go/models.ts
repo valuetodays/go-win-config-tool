@@ -1,4 +1,4 @@
-export namespace domain {
+export namespace dto {
 	
 	export class EnvStatus {
 	    name: string;

@@ -1,4 +1,4 @@
-package domain
+package dto
 
 type EnvStatus struct {
 	Name    string   `json:"name"`

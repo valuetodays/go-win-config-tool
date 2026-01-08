@@ -17,7 +17,7 @@
                 <!-- 描述 -->
                 <div class="env-desc">
                     <template v-if="s.correct">
-                        {{ s.source }} -> {{ s.target }}
+                        {{ s.target }} -> {{ s.source}}
                     </template>
                     <template v-else>
                         未设置

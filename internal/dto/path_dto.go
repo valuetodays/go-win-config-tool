@@ -1,4 +1,4 @@
-package domain
+package dto
 
 type PathStatus struct {
 	Path   string `json:"path"`

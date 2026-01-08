@@ -1,10 +1,8 @@
 package main
 
-import (
-	"go-win-config-tool/domain"
-)
+import "go-win-config-tool/internal/dto"
 
-func (a *App) GetPathsStatus() []domain.PathStatus {
+func (a *App) GetPathsStatus() []dto.PathStatus {
 	if a.pathSvc == nil {
 		return nil
 	}

@@ -1,4 +1,4 @@
-package domain
+package dto
 
 type ShortcutStatus struct {
 	Name    string `json:"name"`
